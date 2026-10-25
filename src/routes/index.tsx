@@ -1,24 +1,28 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { QuizApp } from "@/quiz/QuizApp";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
-  component: Index,
+  head: () => ({
+    meta: [
+      { title: "DevQuiz — Interactive Web Development Quiz" },
+      {
+        name: "description",
+        content:
+          "A React quiz app with 12 web development questions, a per-question timer, instant feedback, progress bar and a full answer review screen.",
+      },
+      { property: "og:title", content: "DevQuiz — Interactive Web Development Quiz" },
+      {
+        property: "og:description",
+        content:
+          "Test your HTML, CSS, JavaScript and React knowledge — 12 questions, 30 seconds each, instant feedback and a final score review.",
+      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
+  component: IndexPage,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
-function Index() {
-  return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
-  );
+function IndexPage() {
+  return <QuizApp />;
 }
