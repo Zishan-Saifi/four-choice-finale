@@ -66,7 +66,7 @@ export function QuizScreen({
           <OptionButton
             key={optionText}
             optionText={optionText}
-            optionLetter={OPTION_LETTERS[optionIndex]}
+            optionLetter={OPTION_LETTERS[optionIndex] ?? "?"}
             state={getOptionState(optionIndex)}
             disabled={hasAnswered}
             onSelect={() => onSelectOption(optionIndex)}

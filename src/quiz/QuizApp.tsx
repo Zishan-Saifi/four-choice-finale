@@ -16,7 +16,9 @@ function shuffle<T>(items: T[]): T[] {
   const copy = [...items];
   for (let i = copy.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
-    [copy[i], copy[j]] = [copy[j], copy[i]];
+    const swapped = copy[j] as T;
+    copy[j] = copy[i] as T;
+    copy[i] = swapped;
   }
   return copy;
 }
@@ -24,12 +26,12 @@ function shuffle<T>(items: T[]): T[] {
 /** Bonus: shuffle the question order AND each question's options every attempt. */
 function buildShuffledQuiz(): Question[] {
   return shuffle(QUESTIONS).map((question) => {
-    const correctOptionText = question.options[question.answer];
+    const correctOptionText = question.options[question.answer] ?? "";
     const options = shuffle(question.options);
     return {
       ...question,
       options,
-      answer: options.indexOf(correctOptionText),
+      answer: Math.max(0, options.indexOf(correctOptionText)),
     };
   });
 }
@@ -67,7 +69,7 @@ export function QuizApp() {
   }
 
   function handleNextQuestion() {
-    if (selectedOption === null) return;
+    if (selectedOption === null || !currentQuestion) return;
 
     const isCorrect = selectedOption === currentQuestion.answer;
     setAnswers((previous) => [
@@ -126,7 +128,7 @@ export function QuizApp() {
           />
         )}
 
-        {stage === "quiz" && (
+        {stage === "quiz" && currentQuestion && (
           <div className="space-y-4">
             <QuizProgress
               questionNumber={currentIndex + 1}
