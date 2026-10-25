@@ -1,16 +1,7 @@
-import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import {
-  ChevronDown,
-  Code2,
-  RotateCcw,
-  Timer,
-  Trophy,
-  XCircle,
-} from "lucide-react";
-import { useState } from "react";
-import { NO_ANSWER, QUESTION_TIME_LIMIT, type AnswerRecord } from "../types";
+import { Code2, Timer, Trophy, Shuffle } from "lucide-react";
+import { QUESTION_TIME_LIMIT } from "../types";
 
 type StartScreenProps = {
   totalQuestions: number;
@@ -34,8 +25,8 @@ export function StartScreen({
         Dev<span className="text-primary">Quiz</span>
       </h1>
       <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-muted-foreground sm:text-base">
-        A quick-fire web development quiz. One question at a time, {QUESTION_TIME_LIMIT}{" "}
-        seconds on the clock — see how high you can score.
+        A quick-fire web development quiz. One question at a time,{" "}
+        {QUESTION_TIME_LIMIT} seconds on the clock — see how high you can score.
       </p>
 
       <div className="mt-5 flex flex-wrap items-center justify-center gap-2">
@@ -54,7 +45,7 @@ export function StartScreen({
           <Timer className="h-4 w-4" /> {QUESTION_TIME_LIMIT}s per question
         </span>
         <span className="flex items-center gap-1.5">
-          <XCircle className="h-4 w-4" /> Fresh order every attempt
+          <Shuffle className="h-4 w-4" /> Fresh order every attempt
         </span>
       </div>
 
@@ -63,11 +54,8 @@ export function StartScreen({
         size="lg"
         className="mt-8 h-12 w-full max-w-xs font-display text-base font-semibold tracking-wide"
       >
-        <RotateCcw className="hidden" aria-hidden />
         Start Quiz
       </Button>
     </div>
   );
 }
-
-export const startScreenCardClass = cn(); // placeholder export to keep cn import used
