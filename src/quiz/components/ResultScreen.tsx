@@ -121,14 +121,14 @@ export function ResultScreen({ score, answers, onRestartQuiz }: ResultScreenProp
                     <span className="font-medium">
                       {record.chosenOption === NO_ANSWER
                         ? "Time's up — no answer"
-                        : record.question.options[record.chosenOption]}
+                        : (record.question.options[record.chosenOption] ?? "")}
                     </span>
                   </p>
                   {!record.isCorrect && (
                     <p className="text-correct">
                       Correct answer:{" "}
                       <span className="font-medium">
-                        {record.question.options[record.question.answer]}
+                        {record.question.options[record.question.answer] ?? ""}
                       </span>
                     </p>
                   )}
